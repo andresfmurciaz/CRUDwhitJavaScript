@@ -36,26 +36,46 @@ const crearNuevaLinea =(nombre,direcion) =>{
 const table = document.querySelector("[data-table]");
 
 
+    const listaClientes = () =>
+    {
+            const promise = new Promise((resolver,reject)=>
+            {
+                const http = new XMLHttpRequest(); 
+                //recibe dos parametros. metodo y url
+                http.open("GET", " http://localhost:3000/perfil");
+                // envia peticion
+                http.send();
 
-const http = new XMLHttpRequest(); 
-//recibe dos parametros. metodo y url
-http.open("GET", " http://localhost:3000/perfil");
+                    http.onload = () =>
+                    {
+                        const response = JSON.parse(http.response);
+                        if(http.status>400){
+                            reject(response);
+                        }else{
+                            resolver(resolver);
+                        }
+                    }
+            })
+      return promise;
+    }
 
-// envia peticion
-http.send();
+    listaClientes().then((data)=>
+    {
+        console.log(data)
+    })
 
-http.onload = () => {
 
-    const data = JSON.parse(http.response);
- 
-    data.forEach((perfil)=>{
+
+
+
+
+
+
+
+
+data.forEach((perfil)=>{
 
     // llamo al metodo
     const lineaCreada = crearNuevaLinea(perfil.nombre,perfil.direcion);
     table.appendChild(lineaCreada);
         })
-
-}
-
-
-
