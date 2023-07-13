@@ -38,7 +38,7 @@ const table = document.querySelector("[data-table]");
 
     const listaClientes = () =>
     {
-            const promise = new Promise((resolver,reject)=>
+            const promise = new Promise((resolve,reject)=>
             {
                 const http = new XMLHttpRequest(); 
                 //recibe dos parametros. metodo y url
@@ -49,10 +49,10 @@ const table = document.querySelector("[data-table]");
                     http.onload = () =>
                     {
                         const response = JSON.parse(http.response);
-                        if(http.status>400){
+                        if(http.status>=400){
                             reject(response);
                         }else{
-                            resolver(resolver);
+                            resolve(response);
                         }
                     }
             })
@@ -61,7 +61,13 @@ const table = document.querySelector("[data-table]");
 
     listaClientes().then((data)=>
     {
-        console.log(data)
+
+        console.log(data);
+        data.forEach((perfil)=>{
+            // se pone el nombre del json
+            const nuevaLinea = crearNuevaLinea(perfil.nombre,perfil.email);
+            table.appendChild(nuevaLinea);
+        })
     })
 
 
