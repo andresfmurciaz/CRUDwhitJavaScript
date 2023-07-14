@@ -36,7 +36,7 @@ const crearNuevaLinea =(nombre,direcion) =>{
 const table = document.querySelector("[data-table]");
 
 
-    const listaClientes = () => fetch(" http://localhost:3000/perfil").then((Response)=> respuesta.json());
+    const listaClientes = () => fetch(" http://localhost:3000/perfil").then((Response)=> Response.json());
     
 
 
