@@ -37,7 +37,8 @@ const crearNuevaLinea =(nombre,direcion,id) =>{
                 const btn = linea.querySelector("button");
                 btn.addEventListener("click",()=>{
                     const id = btn.id;
-                    console.log(id)
+                    // le mando el id capturado al delete
+                    clientService.eliminarCliente(id).then(Response =>{console.log(Response)}).catch((err)=>alert("ocurrio un error"))
                 })
              
                 return linea;
