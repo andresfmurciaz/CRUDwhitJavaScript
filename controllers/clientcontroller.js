@@ -1,10 +1,11 @@
-// trabajar con interaccion con data
+// recibe la DATA de los endpoints
 
 import { clientService } from "../service/client-service.js";
 
-
-const crearNuevaLinea =(nombre,direcion) =>{
-    // crea un elemento html tr para envolver fila
+// CREAR CLIENTE
+const crearNuevaLinea =(nombre,direcion,id) =>{
+    
+        // crea un elemento html tr para envolver fila
            const linea = document.createElement("tr");    
     
            const fila =    
@@ -23,8 +24,7 @@ const crearNuevaLinea =(nombre,direcion) =>{
                         <li>
                         <button
                             class="simple-button simple-button--delete"
-                            type="button"
-                        >
+                            type="button" id="${id}">
                             Eliminar
                         </button>
                         </li>
@@ -34,17 +34,22 @@ const crearNuevaLinea =(nombre,direcion) =>{
                     `;
                     
                 linea.innerHTML= fila;
+                const btn = linea.querySelector("button");
+                btn.addEventListener("click",()=>{
+                    const id = btn.id;
+                    console.log(id)
+                })
+             
                 return linea;
     };
     
-    // recorre todo el DOM y busca donde esta este nombre que es donde queremos que este la
+    
+    
+    // recorre todo el DOM y busca donde esta este nombre que es donde queremos que este la lista
     const table = document.querySelector("[data-table]");
     
 
-    
-
-    clientService
-    .listaClientes()
+    clientService.listaClientes()
     .then((data)=>
     {
         data.forEach(({nombre,email,id})=>
@@ -53,6 +58,16 @@ const crearNuevaLinea =(nombre,direcion) =>{
             table.appendChild(nuevaLinea);
         })
     })
+
+
+
+
+
+
+    const eliminarCliente = (id) =>{
+console.log("eliminadoooooooooooooooooooooooooo")
+        
+    }
 
 
 
