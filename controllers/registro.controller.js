@@ -10,9 +10,11 @@ formulario.addEventListener("submit",(evento)=>{
         const email = document.querySelector("[data-email]").value;
         console.log(nombre,email);
 // envia al post 
-        clientService.crearCliente(nombre,email).then(respueta=>{
+        clientService.crearCliente(nombre,email)
+        .then(respueta=>{
+        // redirecciona a la vista de tarea terminada
+        window.location.href="/screens/registro_completado.html"
 
-        console.log(respueta);
         }).catch(err=>console.log(respueta));
 })
 

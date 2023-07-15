@@ -43,13 +43,13 @@ const crearNuevaLinea =(nombre,direcion) =>{
 
     
 
-    clientService.listaClientes().then((data)=>
+    clientService
+    .listaClientes()
+    .then((data)=>
     {
-
-        console.log(data);
-        data.forEach((perfil)=>{
-            // se pone el nombre del json
-            const nuevaLinea = crearNuevaLinea(perfil.nombre,perfil.email);
+        data.forEach(({nombre,email,id})=>
+        {
+            const nuevaLinea = crearNuevaLinea(nombre,email,id);
             table.appendChild(nuevaLinea);
         })
     })
