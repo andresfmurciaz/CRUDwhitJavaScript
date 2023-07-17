@@ -33,6 +33,19 @@ const detalleCliente = (id) =>
 return fetch(`http://localhost:3000/perfil/${id}`).then((respuesta) => respuesta.json());
 }
 
+ const actualizarCliente = (nombre,enmail,id)=>{
+
+    return fetch(`http://localhost:3000/perfil/${id}`,{
+        method :"PUT",
+        headers:{
+            "content-Type":"application/json"
+        },
+        body:JSON.stringify({nombre,email})
+    })
+    .then(respuesta=> console.log(respuesta))
+    .catch((err)=> console.log(err))
+ }
+
 
 
 export const clientService = {
@@ -40,4 +53,5 @@ export const clientService = {
     crearCliente,
     eliminarCliente,
     detalleCliente,
+    actualizarCliente
 };
